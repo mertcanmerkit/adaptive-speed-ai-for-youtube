@@ -1,0 +1,63 @@
+{
+  "manifest_version": 3,
+  "name": "Adaptive Speed AI for YouTube",
+  "version": "0.1.23",
+  "description": "AI-assisted adaptive playback speed for YouTube videos, with BYOK providers and experimental ChatGPT Plus/Pro auth.",
+  "minimum_chrome_version": "114",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "webNavigation"
+  ],
+  "host_permissions": [
+    "https://www.youtube.com/*",
+    "https://m.youtube.com/*",
+    "https://youtube.com/*",
+    "https://*.youtube.com/*",
+    "https://api.openai.com/*",
+    "https://auth.openai.com/*",
+    "https://chatgpt.com/*",
+    "https://openrouter.ai/*",
+    "https://generativelanguage.googleapis.com/*",
+    "http://localhost:1455/*",
+    "http://127.0.0.1:1455/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*",
+        "https://m.youtube.com/*",
+        "https://youtube.com/*"
+      ],
+      "js": [
+        "page-bridge.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "https://www.youtube.com/*",
+        "https://m.youtube.com/*",
+        "https://youtube.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "Adaptive Speed AI",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html"
+}

@@ -1,0 +1,201 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Adaptive Speed AI Options</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <h1>Adaptive Speed AI</h1>
+          <p>Provider, auth, and speed planning settings.</p>
+        </div>
+        <button id="save" type="button">Save</button>
+      </header>
+
+      <section>
+        <h2>Playback</h2>
+        <div class="grid">
+          <label class="check">
+            <input id="autoAnalyze" type="checkbox" />
+            <span>Auto analyze videos</span>
+          </label>
+	          <label>
+	            <span>Speed mode</span>
+	            <select id="speedMode">
+	              <option value="calm">Calm</option>
+	              <option value="reasonable">Reasonable</option>
+	              <option value="aggressive">Aggressive</option>
+	            </select>
+	          </label>
+	          <label>
+	            <span>Watching for</span>
+	            <select id="viewerGoalMode">
+	              <option value="auto">Auto infer</option>
+	              <option value="learn">Learn deeply</option>
+	              <option value="find_answer">Find answer</option>
+	              <option value="follow_steps">Follow steps</option>
+	              <option value="skim">Skim</option>
+	              <option value="evaluate_claims">Evaluate claims</option>
+	              <option value="enjoy">Enjoy / normal watch</option>
+	            </select>
+	          </label>
+	          <label class="full">
+	            <span>Specific goal</span>
+	            <input id="viewerGoalText" type="text" maxlength="180" placeholder="What do you want from the video?" />
+	          </label>
+	          <label class="full">
+	            <span>Custom prompt</span>
+	            <textarea id="customPrompt" maxlength="700" rows="4" placeholder="Optional extra instruction for speed planning"></textarea>
+	          </label>
+	          <label>
+	            <span>Hedeflenen hız</span>
+            <select id="targetRate">
+              <option value="1">1x</option>
+              <option value="1.15">1.15x</option>
+              <option value="1.25">1.25x</option>
+              <option value="1.5">1.5x</option>
+              <option value="1.75">1.75x</option>
+              <option value="2">2x</option>
+              <option value="2.25">2.25x</option>
+              <option value="2.5">2.5x</option>
+              <option value="3">3x</option>
+              <option value="3.5">3.5x</option>
+              <option value="4">4x</option>
+            </select>
+          </label>
+          <label>
+            <span>Max speed</span>
+            <select id="maxRate">
+              <option value="1">1x</option>
+              <option value="1.15">1.15x</option>
+              <option value="1.25">1.25x</option>
+              <option value="1.5">1.5x</option>
+              <option value="1.75">1.75x</option>
+              <option value="2">2x</option>
+              <option value="2.25">2.25x</option>
+              <option value="2.5">2.5x</option>
+              <option value="3">3x</option>
+              <option value="3.5">3.5x</option>
+              <option value="4">4x</option>
+            </select>
+          </label>
+        </div>
+      </section>
+
+      <section>
+        <h2>Provider</h2>
+        <label>
+          <span>Active provider</span>
+          <select id="provider">
+            <option value="heuristic">Local heuristic</option>
+            <option value="openai">OpenAI API key</option>
+            <option value="openrouter">OpenRouter API key</option>
+            <option value="google">Google Gemini API key</option>
+            <option value="chatgpt">ChatGPT Plus/Pro experimental</option>
+          </select>
+        </label>
+        <div class="provider-actions">
+          <button id="testConnection" type="button" class="secondary">Test connection</button>
+          <span id="connectionStatus" class="inline-status"></span>
+        </div>
+
+        <div class="provider-panel" data-provider="openai">
+          <label>
+            <span>OpenAI API key</span>
+            <input id="openaiApiKey" type="password" autocomplete="off" placeholder="sk-..." />
+          </label>
+          <label>
+            <span>OpenAI model</span>
+            <select id="openaiModel">
+              <option value="gpt-4.1-mini">gpt-4.1-mini</option>
+              <option value="gpt-4.1">gpt-4.1</option>
+              <option value="gpt-4o-mini">gpt-4o-mini</option>
+              <option value="gpt-4o">gpt-4o</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="provider-panel" data-provider="openrouter">
+          <label>
+            <span>OpenRouter API key</span>
+            <input id="openrouterApiKey" type="password" autocomplete="off" placeholder="sk-or-..." />
+          </label>
+          <label>
+            <span>OpenRouter model</span>
+            <select id="openrouterModel">
+              <option value="openai/gpt-4.1-mini">openai/gpt-4.1-mini</option>
+              <option value="openai/gpt-4.1">openai/gpt-4.1</option>
+              <option value="google/gemini-2.0-flash-001">google/gemini-2.0-flash-001</option>
+              <option value="anthropic/claude-3.5-sonnet">anthropic/claude-3.5-sonnet</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="provider-panel" data-provider="google">
+          <label>
+            <span>Google API key</span>
+            <input id="googleApiKey" type="password" autocomplete="off" />
+          </label>
+          <label>
+            <span>Gemini model</span>
+            <select id="googleModel">
+              <option value="gemini-2.0-flash">gemini-2.0-flash</option>
+              <option value="gemini-2.5-flash">gemini-2.5-flash</option>
+              <option value="gemini-2.5-pro">gemini-2.5-pro</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="provider-panel" data-provider="chatgpt">
+          <label>
+            <span>Codex model</span>
+            <select id="chatgptModel">
+              <option value="gpt-5.4-mini">gpt-5.4-mini</option>
+              <option value="gpt-5.4">gpt-5.4</option>
+              <option value="gpt-5.3-codex-spark">gpt-5.3-codex-spark</option>
+            </select>
+          </label>
+          <div class="auth-row">
+            <button id="browserAuth" type="button">Connect in browser</button>
+            <button id="deviceAuth" type="button" class="secondary">Connect with code</button>
+            <button id="disconnectChatgpt" type="button" class="danger">Disconnect</button>
+          </div>
+          <div id="deviceBox" class="device-box" hidden>
+            <span>Open</span>
+            <a id="deviceUrl" href="#" target="_blank" rel="noreferrer">auth page</a>
+            <span>and enter</span>
+            <strong id="deviceCode"></strong>
+          </div>
+          <p id="chatgptStatus" class="note"></p>
+          <p class="note">
+            ChatGPT Plus/Pro auth is experimental and follows Codex OAuth behavior, not the normal public OpenAI API.
+            It can stop working without notice. ChatGPT plans and OpenAI API billing are separate.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2>Storage</h2>
+        <div class="auth-row">
+          <button id="clearCache" type="button" class="secondary">Clear analysis cache</button>
+          <button id="forgetKeys" type="button" class="danger">Forget API keys</button>
+        </div>
+        <p class="note">
+          API keys and ChatGPT tokens are stored in Chrome local extension storage on this machine.
+          The ChatGPT Plus/Pro route uses Codex OAuth behavior and can break without notice.
+        </p>
+        <p class="note">
+          Use a low-limit key. Do not paste passwords, cookies, or session tokens. Transcripts and video metadata are sent
+          to the selected provider when analysis runs.
+        </p>
+      </section>
+
+      <p id="message" class="message"></p>
+    </main>
+    <script src="options.js"></script>
+  </body>
+</html>

@@ -1,0 +1,93 @@
+version: 1
+project:
+  name: "Adaptive Speed AI for YouTube"
+  slug: "adaptive-speed-ai-for-youtube"
+  objective: "Build and maintain a private Chrome MV3 extension that uses transcripts, viewer intent, and AI providers to create adaptive YouTube playback speed plans."
+  origin_mode: "existing-project"
+  repo_url: "https://github.com/mertcanmerkit/adaptive-speed-ai-for-youtube"
+  local_path: "<local-clone-path>"
+  status: active
+  next_task: "Continue real-video testing, refine speed-plan relevance, and keep extension packaging and project memory current."
+privacy:
+  default_visibility: private
+  public_allowed: false
+  require_private_remote_verification: true
+  verify_command: "gh repo view OWNER/REPO --json isPrivate,url,nameWithOwner"
+memory:
+  read_order:
+    - AGENTS.md
+    - ai-project.yaml
+    - knowledge/README_FOR_AI.md
+    - docs/00_project_brief.md
+    - docs/01_ai_operating_model.md
+    - docs/02_session_handoff_prompt.md
+    - docs/03_validation.md
+    - docs/04_cross_ai_orchestration.md
+    - docs/05_project_adoption.md
+    - docs/06_memory_freshness.md
+    - docs/07_ai_orchestration_source_of_truth.md
+    - docs/08_product_decisions.md
+    - source_of_truth/README.md
+    - outputs/adaptive-speed-ai-extension/README.md
+    - outputs/adaptive-speed-ai-extension/ARCHITECTURE.md
+    - outputs/adaptive-speed-ai-extension/MVP_REPORT.md
+  source_of_truth_manifest: source_of_truth/README.md
+  handoff_prompt: docs/02_session_handoff_prompt.md
+  scratch_space: work/
+freshness:
+  last_reviewed: 2026-07-01
+  stale_after_days: 14
+  update_triggers:
+    - before_handoff
+    - before_push
+    - after_meaningful_implementation_change
+    - after_objective_scope_or_architecture_change
+    - after_source_of_truth_change
+    - after_external_ai_output_is_accepted
+    - after_validation_commands_change
+validation:
+  commands:
+    - python3 scripts/ai_project_check.py
+    - node --check outputs/adaptive-speed-ai-extension/background.js
+    - node --check outputs/adaptive-speed-ai-extension/content.js
+    - node --check outputs/adaptive-speed-ai-extension/popup.js
+    - node --check outputs/adaptive-speed-ai-extension/options.js
+    - python3 -m json.tool outputs/adaptive-speed-ai-extension/manifest.json
+    - unzip -tq outputs/adaptive-speed-ai-extension.zip
+    - git status --short --branch
+  required_files:
+    - AGENTS.md
+    - CLAUDE.md
+    - .cursor/rules/project.mdc
+    - .github/copilot-instructions.md
+    - ai-project.yaml
+    - docs/00_project_brief.md
+    - docs/01_ai_operating_model.md
+    - docs/02_session_handoff_prompt.md
+    - docs/03_validation.md
+    - docs/04_cross_ai_orchestration.md
+    - docs/05_project_adoption.md
+    - docs/06_memory_freshness.md
+    - docs/07_ai_orchestration_source_of_truth.md
+    - docs/08_product_decisions.md
+    - knowledge/README_FOR_AI.md
+    - source_of_truth/README.md
+    - scripts/ai_project_check.py
+    - work/README.md
+compatibility:
+  standard_agents: AGENTS.md
+  claude: CLAUDE.md
+  cursor: .cursor/rules/project.mdc
+  copilot: .github/copilot-instructions.md
+  codex_handoff: docs/02_session_handoff_prompt.md
+cross_ai:
+  registry: docs/04_cross_ai_orchestration.md
+  private_by_default: true
+design_tools:
+  google_stitch:
+    screen_registry: source_of_truth/stitch-map.md
+    model_default: highest_available_usable
+    practical_default: pro
+    flash_requires_explicit_user_instruction: true
+    mvp_is_not_flash_instruction: true
+    source_of_truth_rule: "Stitch screens are candidates; accepted current versions must be recorded in the registry and distilled into DESIGN.md, tokens, docs, or code."

@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Adaptive Speed AI</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>Adaptive Speed AI</h1>
+      </header>
+
+	      <section class="status">
+	        <div>
+	          <span class="label">Page</span>
+	          <strong id="pageStatus">Checking...</strong>
+	        </div>
+	        <div>
+	          <span class="label">Provider</span>
+	          <strong id="providerStatus">Checking...</strong>
+	        </div>
+	      </section>
+
+	      <section class="settings">
+	        <label>
+	          <span class="label">Provider</span>
+	          <select id="providerSelect">
+	            <option value="heuristic">Local heuristic</option>
+	            <option value="openai">OpenAI API key</option>
+	            <option value="openrouter">OpenRouter API key</option>
+	            <option value="google">Google Gemini API key</option>
+	            <option value="chatgpt">ChatGPT Plus/Pro</option>
+	          </select>
+	        </label>
+	        <label>
+	          <span class="label">Model</span>
+	          <select id="modelSelect"></select>
+	        </label>
+		        <label>
+		          <span class="label">Mode</span>
+		          <select id="speedMode">
+		            <option value="calm">Calm</option>
+		            <option value="reasonable">Reasonable</option>
+		            <option value="aggressive">Aggressive</option>
+		          </select>
+		        </label>
+		        <label>
+		          <span class="label">Watching for</span>
+		          <select id="viewerGoalMode">
+		            <option value="auto">Auto infer</option>
+		            <option value="learn">Learn deeply</option>
+		            <option value="find_answer">Find answer</option>
+		            <option value="follow_steps">Follow steps</option>
+		            <option value="skim">Skim</option>
+		            <option value="evaluate_claims">Evaluate claims</option>
+		            <option value="enjoy">Enjoy / normal watch</option>
+		          </select>
+		        </label>
+		        <label class="wide">
+		          <span class="label">Specific goal</span>
+		          <input id="viewerGoalText" type="text" maxlength="180" placeholder="e.g. why Hermes is replacing OpenClaw" />
+		        </label>
+		        <label class="wide">
+		          <span class="label">Custom prompt</span>
+		          <textarea id="customPrompt" maxlength="700" rows="3" placeholder="Optional extra instruction for speed planning"></textarea>
+		        </label>
+		        <label>
+		          <span class="label">Hedeflenen hız</span>
+		          <select id="targetRate"></select>
+	        </label>
+	        <label>
+	          <span class="label">Max speed</span>
+	          <select id="maxRate"></select>
+	        </label>
+	      </section>
+
+	      <section class="stats">
+	        <div>
+	          <span class="label">This video plan saves</span>
+	          <strong id="plannedSavings">--</strong>
+	        </div>
+	        <div>
+	          <span class="label">Saved on this video</span>
+	          <strong id="videoSaved">0:00</strong>
+	        </div>
+	        <div>
+	          <span class="label">Total saved till now</span>
+	          <strong id="totalSaved">0:00</strong>
+	        </div>
+	      </section>
+
+	      <div class="actions">
+        <button id="analyze" type="button">Analyze current video</button>
+        <button id="options" type="button" class="secondary">Options</button>
+      </div>
+
+      <p id="message" class="message"></p>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>

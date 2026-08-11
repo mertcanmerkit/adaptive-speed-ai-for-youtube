@@ -1,0 +1,14 @@
+---
+description: Private AI project memory, validation, and handoff rules
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+Read `AGENTS.md` first and treat it as the canonical project instruction file.
+
+Use `ai-project.yaml` for machine-readable project state and read order.
+Keep `docs/02_session_handoff_prompt.md`, `docs/03_validation.md`, and `docs/06_memory_freshness.md` current after meaningful changes.
+Use `docs/07_ai_orchestration_source_of_truth.md` for master/specialist routing, approval gates, and definition of done.
+Run `python3 scripts/ai_project_check.py` before push or handoff.
+GitHub publishing is private by default unless the user explicitly requests public visibility.

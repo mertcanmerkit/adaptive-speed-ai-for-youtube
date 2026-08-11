@@ -1,0 +1,30 @@
+.DS_Store
+.idea/
+tmp/
+.env
+.env.*
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# Local browser/test artifacts.
+work/*
+!work/README.md
+
+# Keep the extension source, but do not commit packaged zips.
+outputs/*.zip
+
+# Local research clones and profiles are intentionally excluded.
+work/opencode/
+work/min-chrome-profile/
+work/min-extension/
+
+# Browser and OS state.
+*.log
+*.pid
+*.db
+*.db-journal
+*.db-wal
+*.sqlite
+*.sqlite3
